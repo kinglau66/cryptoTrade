@@ -41,22 +41,22 @@ public class CoinPrice {
     @Column(name = "to_coin_id", updatable = false, nullable = false)
     private String toCoinCode;
 
-    @Column(name = "best_ask_price", updatable = false, nullable = false)
+    @Column(name = "best_ask_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal bestAskprice;
 
-    @Column(name = "best_bid_price", updatable = false, nullable = false)
+    @Column(name = "best_bid_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal bestBidprice;
 
-    @Column(name = "binance_ask_price", updatable = false, nullable = false)
+    @Column(name = "binance_ask_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal binanceAskPrice;
 
-    @Column(name = "binance_bid_price", updatable = false, nullable = false)
+    @Column(name = "binance_bid_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal binanceBidPrice;
 
-    @Column(name = "huuobi_ask_price", updatable = false, nullable = false)
+    @Column(name = "huuobi_ask_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal huobiAskPrice;
 
-    @Column(name = "huobi_bid_price", updatable = false, nullable = false)
+    @Column(name = "huobi_bid_price", updatable = false, nullable = false, precision = 20, scale = 8)
     private BigDecimal huobiBidPrice;
 
     @Column(name = "query_time", updatable = false, nullable = false)

@@ -3,10 +3,11 @@ package com.king.myapp.domain;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * user's wallet.
@@ -27,12 +28,12 @@ public class Wallet implements Serializable {
     private Long userId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<WalletCoinBalance> balances;
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Set<WalletCoinBalance> balances = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<WalletTransaction> transactions;
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Set<WalletTransaction> transactions = new HashSet<>();
 
     public Long getId() {
         return id;
