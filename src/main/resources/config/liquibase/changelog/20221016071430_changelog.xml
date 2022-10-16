@@ -1,0 +1,73 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="User (generated)" id="1665904474609-1">
+        <createTable tableName="coin">
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="coinPK"/>
+            </column>
+            <column name="is_digital" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="symbol" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <loadData
+            file="config/liquibase/data/coin.csv"
+            separator=";"
+            tableName="coin"
+            usePreparedStatements="true">
+            <column name="code" type="VARCHAR(255)"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="User (generated)" id="1665904474609-2">
+        <createTable tableName="coin_price">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="coin_pricePK"/>
+            </column>
+            <column name="best_ask_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="best_bid_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="binance_ask_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="binance_bid_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fr_coin_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="huuobi_ask_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="huobi_bid_price" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="query_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="symbol" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_coin_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1665904474609-3">
+        <createTable tableName="wallet">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="walletPK"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1665904474609-6">
+        <addUniqueConstraint columnNames="symbol" constraintName="UC_COINSYMBOL_COL" tableName="coin"/>
+    </changeSet>
+</databaseChangeLog>
