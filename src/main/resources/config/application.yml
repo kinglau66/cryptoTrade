@@ -91,6 +91,7 @@ management:
             enabled: true
 
 spring:
+  jackson.default-property-inclusion: non_null
   application:
     name: cryptoTrade
   profiles:
