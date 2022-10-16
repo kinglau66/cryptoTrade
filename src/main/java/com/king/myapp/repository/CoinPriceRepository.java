@@ -17,5 +17,5 @@ public interface CoinPriceRepository extends JpaRepository<CoinPrice, Long> {
     public List<CoinPrice> findByUniqueSymbol();
 
     @Query("select cp from CoinPrice cp where cp.id in (select max(cp2.id) from CoinPrice cp2 where symbol = ?1 group by cp2.symbol)")
-    public List<CoinPrice> findBestPriceBySymbol(String symbol);
+    public Optional<CoinPrice> findBestPriceBySymbol(String symbol);
 }
