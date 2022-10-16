@@ -1,16 +1,14 @@
 package com.king.myapp.web.rest;
 
-import com.king.myapp.domain.Wallet;
 import com.king.myapp.repository.UserRepository;
 import com.king.myapp.service.CoinPriceService;
 import com.king.myapp.service.WalletService;
+import com.king.myapp.service.dto.TransactionReqDTO;
+import com.king.myapp.service.dto.WalletDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * REST controller for managing the current user's account.
@@ -40,7 +38,13 @@ public class WalletResource {
 
     @GetMapping("/user/{userId}")
     @Transactional
-    public Wallet getWalletByUserId(@PathVariable("userId") Long userId) {
+    public WalletDto getWalletByUserId(@PathVariable("userId") Long userId) {
         return this.walletService.getWalletByUserId(userId);
+    }
+
+    @PostMapping("/trade-req/{userId}")
+    @Transactional
+    public boolean trade(@PathVariable("userId") Long userId, @RequestBody TransactionReqDTO transactionReqDTO) {
+        return this.walletService.trade(userId, transactionReqDTO);
     }
 }
